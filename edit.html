@@ -1,0 +1,242 @@
+<html>
+    <head> 
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+            <title>
+                EDIT CARD
+            </title>
+        <style>
+            html{
+                font-family:cursive;
+                color:white;
+            }
+            body{
+                background: linear-gradient(to right, rgba(4, 187, 47, 0.989), rgb(0, 76, 130));
+            }
+            .buttons{
+                margin:10px;
+                padding:15px;
+                background-color: white;
+                color:black;
+                border-radius: 15px;
+                transition: transform 0.5s;
+                font-weight: bold;
+            }
+            .buttons:hover{
+                transform:scale(1.1);
+                box-shadow: 2px 2px rgba(255,255,255,0.5);
+            }
+        </style>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+    <body onload="getAllCards()">
+        <div id="navbar">
+
+        </div>
+        <div class="card-container" style="display: flex;flex-direction: row; position: relative; flex-wrap: wrap;">
+
+        </div>
+
+    <script>
+            function edit(object)
+            {
+                
+                for (let i = 0; i < localStorage.length; i++) {
+                const iterKey = localStorage.key(i);
+                if (object.cardkey===iterKey) {
+                    localStorage.setItem(iterKey,JSON.stringify(object))
+                    console.log(object)
+                }
+ 
+               window.open('index.html','_blank')
+                window.close()
+            }
+            }
+        function header()
+        {
+            let navbar=document.getElementById('navbar');
+        let divc=document.createElement('div');
+        divc.className='container-fluid'
+        divc.style.padding='10px'
+        divc.style.marginTop='10px'
+        divc.style.marginBottom='10px'
+        divc.style.backgroundColor='rgba(0, 0, 0, 0.5)'
+
+        let h1=document.createElement('h1');
+        h1.style.color='white';
+        h1.textContent='Edit Card';
+        divc.appendChild(h1);
+        navbar.appendChild(divc);
+        }
+
+        function cardCreator(object,key)
+        {
+            let card=document.createElement('div');
+            card.className='card';
+            card.style.width='18rem';
+            card.style.margin='10px';
+        
+            let imgtop=document.createElement('img');
+            imgtop.className='card-img-top';
+            imgtop.id='image';
+            imgtop.src=object.image;
+            imgtop.alt=object.title;
+            imgtop.style.width='100%';
+            imgtop.style.height='200px';
+            imgtop.style.objectFit='cover';
+            imgtop.style.borderRadius='10px';
+        
+            let contentDiv=document.createElement('div');
+            contentDiv.className='card-body';
+
+            let inputh2=document.createElement('input')
+            inputh2.type="text"
+            inputh2.value=object.title;
+            inputh2.className='card-title';
+            inputh2.id='title';
+            inputh2.style.border='none';
+            inputh2.addEventListener('change', function() {
+                object.title=inputh2.value;
+            });
+        
+            let p=document.createElement('input')
+            p.type="text"
+            p.value=object.description;
+            p.className='card-text';
+            p.id='description';
+            p.addEventListener('change', function() {
+                object.description=p.value;
+            });
+            
+            let menu=document.createElement('ul');
+            menu.className='list-group list-group-flush';
+            let li1=document.createElement('input')
+            li1.type="date"
+            li1.value=object.date;
+            li1.className='list-group-item';
+            li1.id='date';
+            li1.textContent="Date : "+object.date;
+            li1.addEventListener('change', function() {
+                object.date=li1.value;
+            });
+            let li2=document.createElement('input')
+            li2.type="time"
+            li2.value=object.time;
+            li2.className='list-group-item';
+            li2.textContent="Time : "+object.time;
+            li2.id='time';
+            li2.addEventListener('change', function() {
+                object.time=li2.value;
+            });
+            let li3=document.createElement('input')
+            li3.type="text"
+            li3.value=object.event;
+            li3.className='list-group-item';
+            li3.textContent="Event : "+object.event;
+            li3.id='event';
+            li3.style.border='none';
+            li3.addEventListener('change', function() {
+                object.event=li3.value;
+            }); 
+            let button=document.createElement('button');
+            button.textContent='Edit';
+            button.className='buttons';
+            button.addEventListener('click', function() {
+                edit(object);
+            });
+                
+            card.appendChild(imgtop);
+            contentDiv.appendChild(inputh2);
+            menu.appendChild(li3);
+            menu.appendChild(li1);
+            menu.appendChild(li2);
+        
+         
+            contentDiv.appendChild(menu);
+            contentDiv.appendChild(p);
+            contentDiv.appendChild(button);
+            card.appendChild(contentDiv);
+            cardContainer=document.querySelector('.card-container');
+            
+            cardContainer.appendChild(card);
+        
+        }
+    
+        
+function fontchange()
+{
+    let body = document.querySelector('body');
+    let nav = document.querySelector('#navbar');
+    let footer=document.querySelector('#footer');
+    for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+        
+                if (key.startsWith('colors')) {
+
+                    const cardString = localStorage.getItem(key);
+                    fonts = JSON.parse(cardString);
+                }
+            }
+            console.log(fonts)
+            body.style.fontFamily=fonts.fontstyle
+        body.style.color = fonts.bodycolor
+        nav.style.backgroundColor = fonts.navcolor
+    footer.style.backgroundColor=fonts.footercolor 
+
+}
+function themechange()
+{
+    let body=document.querySelector('body');
+    for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+        
+                if (key.startsWith('theme')) {
+
+                    const cardString = localStorage.getItem(key);
+                    themes = JSON.parse(cardString);
+                }
+            }
+            console.log(themes)
+            body.style.backgroundImage=themes.theme
+            body.style.backgroundPosition=themes.bgposition
+            body.style.backgroundSize=themes.bgsize
+            body.style.color=themes.color
+}
+
+function getAllCards() {
+            const cards = [];
+            console.log(localStorage.length);
+            header();
+            themechange()
+            fontchange();
+            for (let i = 0; i < localStorage.length; i++) {
+                const key = localStorage.key(i);
+        
+                if (key.startsWith('card_')) {
+
+                    const cardString = localStorage.getItem(key);
+                    console.log(key)
+                    const card = JSON.parse(cardString);
+                    cardCreator(card, key)
+                    cards.push(card);
+                }
+            }
+        }
+
+                </script>
+
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+            <footer>
+                <div class="container-fluid" id="footer" style="color:white ;background-color: rgba(0, 0, 0, 0.493);">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <p style="text-align: center;"> 
+                                ©All Rights Reserved
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </footer>
+    </body>
+   
+</html>

@@ -1,0 +1,107 @@
+<html>
+    <head> 
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>
+            ©Card Stacker
+        </title>
+        <style>
+            html{
+                font-family:cursive;
+            }
+            .nav{
+                width:96%;
+                height: auto;
+                margin:10px;
+                border-radius: 10px;
+                display: flex;
+                background-color: rgba(0, 0, 0, 0.482);
+                flex-direction: column;
+                padding: auto;
+            }
+            .buttons{
+                margin:10px;
+                padding:15px;
+                background-color: white;
+                border-radius: 15px;
+                transition: transform 0.5s;
+                font-weight: bold;
+            }
+            .buttons:hover{
+                transform:scale(1.1);
+                box-shadow: 2px 2px rgba(255,255,255,0.5);
+            }
+            a{
+                text-decoration: none;
+            }
+            .searchbar{
+                border-radius: 40px;
+                width:40%;
+                margin:15px;
+                padding:10px;
+                transition: transform 0.5s;
+            }
+            .searchbar:focus{
+                transform: scale(1.1);
+            }
+
+        </style>
+
+       <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    </head>
+
+    <body onload="getAllCards()">
+        <script src="script.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+<div class="row">
+    <div class="col-sm-12  col-lg-12">
+        <div class="nav"> 
+            <div class="row" style="display: flex;flex-direction: row; position: relative;">
+                <div class="col-lg-6 col-sm-12">
+                        <h1 style="color:white;margin: 10px;"> Welcome to Card Stacker</h1>
+                        <select class="buttons" id="theme" style="width: fit-content;" onchange="themechange(event)">
+                            <option value="sad" >SAD</option>
+                            <option value="funny" >FUNNY</option>
+                            <option value="cool" >COOL</option>
+                            <option value="default">Default</option>
+                            </select>
+                             <select class="buttons" id="fonts" style="width: fit-content;" onchange="fontchange(event)">
+                                <option value="green" >Green</option>
+                                <option value="red" >Red</option>
+                                <option value="blue">Blue</option>
+                             <option value="default">Default</option>
+                             </select>
+                     </div>
+                    <div class="col-lg-6 col-sm-12"> 
+                        <button class="buttons"><a style="text-decoration: none; color:black" href="add.html" target="_blank" onclick="window.close();">ADD</a></button>
+                        <button class="buttons" onclick="deleteAll()">Delete</button>
+                        <select class="buttons" id="search-opt">
+                            <option value="title" id="option">Title</option>
+                            <option value="event" id="option">Event</option>
+                            <option value="date" id="option">Date</option>
+                            <option value="description" id="option">Description</option>
+                            </select>
+                        <input type="text" placeholder="Search" class="searchbar"id="search" onkeypress="handleKeyPress(event)">
+                    </div>
+                </div>
+            </div>
+         </div>
+        </div>
+        <div class="card-container" style="display: flex;flex-direction: row; position: relative; flex-wrap: wrap;">
+
+        </div>
+        <footer>
+ 
+            <div class="container-fluid" id="footer" style="color:white; margin-top:10px ;background-color: rgba(0, 0, 0, 0.493);">
+                <div class="row">
+                    <div class="col-lg-12 col-sm-12">
+                        <p style="text-align: center;"> 
+                            ©All Rights Reserved
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </body>
+
+</html>

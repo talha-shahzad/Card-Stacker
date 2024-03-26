@@ -1,0 +1,205 @@
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>ADD CARD FORM</title>
+    </head>
+    <style>
+        body{
+            background: linear-gradient(to right, rgba(104, 4, 99, 0.989), rgb(232, 221, 19));
+        }
+        #ADD-form{
+            margin-left:25%;
+            margin-right:25%;
+            display:flex;
+            flex-Direction:column;
+            background-Color:rgba(255,255, 255, 0.499);
+            border:5px;
+            border-Radius:10px;
+            margin-Top:10px;
+            padding:20px;
+            font-Size:20px;
+            color:black;  
+        }
+        .text-box{
+            width:50%;
+            margin:15px;
+            border-Radius:20px;
+        }
+        .buttons{
+                margin:5px;
+                padding:10px;
+                background-color:inherit;
+                color:black;
+                border-radius: 15px;
+                transition: transform 0.5s;
+                font-weight: bold;
+            }
+            .buttons:hover{
+                transform:scale(1.1);
+                background-color:rgba(255, 255, 255, 0.632);
+                box-shadow: 2px 2px rgba(255,255,255,0.5);
+            }
+    </style>
+     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet">
+    <body>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"></script>
+        
+  
+    <script>
+        let h1=document.createElement('h1');
+        h1.style.color='white';
+        h1.textContent='Add Card';
+
+        let divc=document.createElement('div');
+        divc.className='container-fluid'
+        divc.style.padding='10px'
+        divc.style.marginTop='10px'
+        divc.style.marginBottom='10px'
+        divc.style.backgroundColor='rgba(0, 0, 0, 0.5)'
+
+        let div1=document.createElement('div');
+        div1.id='ADD-form';
+        let form=document.createElement('form')
+
+        
+        br1=document.createElement('br');
+        br2=document.createElement('br');
+        br3=document.createElement('br');
+        br4=document.createElement('br');
+        br5=document.createElement('br');
+        br6=document.createElement('br');
+
+        let label_title=document.createElement('label');
+        label_title.textContent='Title : ';
+        let input_title=document.createElement('input');
+        input_title.type='text';
+        input_title.className='text-box';
+        input_title.id='title'
+
+        let label_date=document.createElement('label');
+        label_date.textContent='Select Date : ';
+        let input_date=document.createElement('input');
+        input_date.type='date';
+        input_date.style.background='inherit'
+        input_date.style.borderRadius='10px'
+        input_date.id='date'
+
+        let label_event=document.createElement('label');
+        label_event.textContent='Event : ';
+        let input_event=document.createElement('input');
+        input_event.type='text';
+        input_event.className='text-box';
+        input_event.id='event'
+
+        let label_time=document.createElement('label');
+        label_time.textContent='Time : ';
+        let input_time=document.createElement('input');
+        input_time.style.background='inherit'
+        input_time.style.borderRadius='10px'
+        input_time.type='time';
+        input_time.id='time'
+
+        let label_description=document.createElement('label');
+        label_description.textContent='Description : ';
+        let input_description=document.createElement('input');
+        input_description.type='long-text';
+        input_description.className='text-box';
+        input_description.id='description'
+
+        let label_image=document.createElement('label');
+        label_image.textContent='Upload Image : ';
+        let input_image=document.createElement('input');
+        input_image.type='file';
+        input_image.accept='image/*';
+        input_image.style.padding='10px'
+        input_image.id='image'
+
+
+        let btn=document.createElement('input')
+        btn.type='submit';
+        btn.className='buttons';
+        btn.value='Add Card'
+        btn.addEventListener('click',function(){
+             addCard()
+        });
+
+        let cbtn=document.createElement('input')
+        cbtn.type='submit';
+        cbtn.className='buttons';
+        cbtn.value='Exit'
+        cbtn.addEventListener('click', function(){
+            window.open('index.html', '_blank')
+            window.close();
+        });
+
+
+        form.appendChild(label_title)   
+        form.appendChild(input_title)
+        form.appendChild(br1)
+        form.appendChild(label_date)
+        form.appendChild(input_date)
+        form.appendChild(br2)
+        form.appendChild(label_event)
+        form.appendChild(input_event)
+        form.appendChild(br3)
+        form.appendChild(label_time)
+        form.appendChild(input_time)
+        form.appendChild(br4)
+        form.appendChild(label_description)
+        form.appendChild(input_description)
+        form.appendChild(br5)
+        form.appendChild(label_image)
+        form.appendChild(input_image)
+        form.appendChild(br6)
+        form.appendChild(btn)
+        form.appendChild(cbtn)
+
+        div1.appendChild(form)
+        divc.appendChild(h1);
+        document.body.appendChild(divc);
+        document.body.appendChild(div1);
+
+
+    function addCard(){
+
+        cardKey = 'card_' + new Date().getTime();
+        let title=document.getElementById('title').value;
+        let date=document.getElementById('date').value;
+        let event=document.getElementById('event').value;
+        let time=document.getElementById('time').value;
+        let description=document.getElementById('description').value;
+        let imageInput = document.getElementById('image');
+    
+    let imagePath = imageInput.value;
+    let imageName = imagePath.split('\\').pop();
+
+        let card={
+            title:title,
+            date:date,
+            event:event,
+            time:time,
+            description:description,
+            image:imageName,
+            cardkey:cardKey
+        }
+        console.log(card);
+        const cardString = JSON.stringify(card);
+        localStorage.setItem(cardKey, cardString);
+        window.open('index.html', '_blank')
+        window.close();
+    }
+    </script>
+    <footer>
+        <div class="container-fluid" id="footer" style="color:white; margin-top:10px ;background-color: rgba(0, 0, 0, 0.493);">
+            <div class="row">
+                <div class="col-lg-12 col-sm-12">
+                    <p style="text-align: center;"> 
+                        ©All Rights Reserved
+                    </p>
+                </div>
+            </div>
+        </div>
+    </footer>
+    </body>
+</html>
